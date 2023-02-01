@@ -1,10 +1,13 @@
 #include "Block.h"
 
-Block::Block(unsigned row, unsigned col)
+Block::Block(sf::VideoMode videoMode, unsigned row, unsigned col)
 {
     this->shape.setSize(sf::Vector2f(80.f, 80.f));
-    this->shape.setPosition(row * 80.f, col * 80.f);
+    this->shape.setPosition((videoMode.width * 0.5) - 130 + col* 80.f, (videoMode.height * 0.5) - 130 + row * 80.f);
     this->texture = new sf::Texture();
+    this->value = 1 + 3*row + col;
+    this->row = row;
+    this->col = col;
     setTexture();
 }
 
@@ -25,3 +28,55 @@ void Block::setTexture(){
 sf::RectangleShape Block::getShape(){
     return this->shape;
 }
+
+
+int Block::getValue(){
+    return this->value;
+}
+
+
+sf::Vector2i Block::getIndex(){
+    return sf::Vector2i(this->row, this->col);
+}
+
+
+void Block::moveRight(){
+    if(this->col < 2){
+        this->shape.move(80, 0);
+        this->col++;
+    }
+}
+
+
+void Block::moveLeft(){
+    if(this->col > 0){
+        this->shape.move(-80, 0);
+        this->col--;
+    }
+}
+
+void Block::moveUp(){
+    if(this->row > 0){
+        this->shape.move(0, -80);
+        this->row--;
+    }
+}
+
+
+void Block::moveDown(){
+    if(this->row > 0){
+        this->shape.move(0, 80);
+        this->row++;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

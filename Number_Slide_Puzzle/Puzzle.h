@@ -10,13 +10,18 @@ class Puzzle
         Puzzle();
         virtual ~Puzzle();
     public:
-        void printBlocks(sf::RenderTarget &target);
-        void newGame();
+        void printBoard(sf::RenderTarget &target);
+        void newGame(sf::VideoMode videoMode);
+        std::vector<Block> *getBlocks();
+        void moveBlock(sf::Vector2f mousePosView);
 
     protected:
 
     private:
         std::vector<Block> blocks;
+        sf::RectangleShape board;
+        sf::Texture *texture;
+        void setTexture();
 
 };
 

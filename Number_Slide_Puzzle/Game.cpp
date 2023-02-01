@@ -17,12 +17,14 @@ Game::~Game()
 void Game::update(){
     this->pollEvents();
     this->updateMousePosition();
+    this->play();
 }
 
 
 void Game::render(){
     this->window->clear(sf::Color(226, 183, 128));
-    this->puzzle->printBlocks(*this->window);
+    this->puzzle->printBoard(*this->window);
+    this->renderText();
     this->window->display();
 }
 
@@ -40,11 +42,11 @@ void Game::pollEvents(){
 
 void Game::initVariables(){
     this->videoMode.height = 500;
-    this->videoMode.width = 450;
+    this->videoMode.width = 380;
     this->endGame = false;
     this->mouseHeld = false;
     this->puzzle = new Puzzle();
-    this->puzzle->newGame();
+    this->puzzle->newGame(this->videoMode);
 }
 
 
@@ -78,9 +80,39 @@ const bool Game::running() const{
 
 
 void Game::initText(){
-    std::stringstream ss;
-    ss << "NONE";
     this->text.setFont(this->font);
-    this->text.setCharacterSize(25);
-    this->text.setString(ss.str());
+    this->text.setCharacterSize(35);
+    this->text.setFillColor(sf::Color::Black);
+}
+
+
+void Game::renderText(){
+    std::vector<Block> *blocks = this->puzzle->getBlocks();
+    std::stringstream ss;
+    sf::Vector2i blockIndex;
+    float offsetX = (videoMode.width * 0.5) - 100;
+    float offsetY = (videoMode.height * 0.5) - 115;
+    for(unsigned i = 0; i < blocks->size(); i++){
+        blockIndex = blocks->at(i).getIndex();
+        ss.str("");
+        ss << blocks->at(i).getValue();
+        this->text.setString(ss.str());
+        this->text.setPosition(
+            offsetX + blockIndex.y*80,
+            offsetY + blockIndex.x*80
+        );
+        this->window->draw(this->text);
+    }
+}
+
+
+void Game::play(){
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        if(!this->mouseHeld){
+            this->mouseHeld = true;
+            this->puzzle->moveBlock(this->mousePosView);
+        }
+    }else{
+        this->mouseHeld = false;
+    }
 }

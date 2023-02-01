@@ -42,6 +42,8 @@ class Game
         void initText();
         void pollEvents();
         void updateMousePosition();
+        void renderText();
+        void play();
 };
 
 #endif // GAME_H
