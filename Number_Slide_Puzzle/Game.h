@@ -31,6 +31,7 @@ class Game
         sf::Vector2i mousePosWindow;
         sf::Vector2f mousePosView;
 
+        //game logic
         bool endGame;
         bool mouseHeld;
         Puzzle *puzzle;

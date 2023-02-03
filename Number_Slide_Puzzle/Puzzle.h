@@ -21,7 +21,9 @@ class Puzzle
         std::vector<Block> blocks;
         sf::RectangleShape board;
         sf::Texture *texture;
+        float blockSize = 80.f;
         void setTexture();
+        void shuffle();
 
 };
 

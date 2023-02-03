@@ -13,7 +13,11 @@ class Block
         sf::RectangleShape getShape();
         int getValue();
         sf::Vector2i getIndex();
+        void setIndex(sf::Vector2i index);
         void moveRight();
+        void moveLeft();
+        void moveDown();
+        void moveUp();
 
     protected:
 
@@ -23,8 +27,8 @@ class Block
         int value;
         int row;
         int col;
-        bool up, down, left, right;
         void setTexture();
+        int up, down, left, right;
 };
 
 #endif // BLOCK_H

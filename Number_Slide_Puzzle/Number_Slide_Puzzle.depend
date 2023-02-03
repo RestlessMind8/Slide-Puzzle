@@ -436,23 +436,23 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1675293934 source:c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\block.cpp
+1675464819 source:c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\block.cpp
 	"Block.h"
 
-1675293583 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\block.h
+1675464761 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\block.h
 	<SFML/Graphics.hpp>
 	<iostream>
 
 1675294514 source:c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\game.cpp
 	"Game.h"
 
-1675294438 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\game.h
+1675388494 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\game.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<sstream>
 	"Puzzle.h"
 
-1675294424 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\puzzle.h
+1675464595 c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\puzzle.h
 	<SFML/Graphics.hpp>
 	"Block.h"
 
@@ -461,6 +461,6 @@
 	"Game.h"
 	<SFML/Graphics.hpp>
 
-1675294423 source:c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\puzzle.cpp
+1675441387 source:c:\users\bruno\desktop\algoritmos\c++\number_slide_puzzle_\number_slide_puzzle\puzzle.cpp
 	"Puzzle.h"
 
