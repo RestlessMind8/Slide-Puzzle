@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block(sf::VideoMode videoMode, unsigned row, unsigned col)
+Block::Block(sf::VideoMode videoMode, unsigned row, unsigned col, bool empty)
 {
     this->shape.setSize(sf::Vector2f(80.f, 80.f));
     this->shape.setPosition((videoMode.width * 0.5) - 130 + col * 80.f, (videoMode.height * 0.5) - 130 + row * 80.f);
@@ -9,6 +9,7 @@ Block::Block(sf::VideoMode videoMode, unsigned row, unsigned col)
     this->row = row;
     this->col = col;
     setTexture();
+    this->empty = empty;
 }
 
 Block::~Block()
@@ -27,6 +28,11 @@ void Block::setTexture(){
 
 sf::RectangleShape Block::getShape(){
     return this->shape;
+}
+
+
+void Block::setPosition(sf::Vector2f position){
+    this->shape.setPosition(position);
 }
 
 
@@ -77,6 +83,9 @@ void Block::moveDown(){
 }
 
 
+bool Block::isEmpty(){
+    return this->empty;
+}
 
 
 

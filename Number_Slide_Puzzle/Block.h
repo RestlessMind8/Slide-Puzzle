@@ -7,7 +7,7 @@
 class Block
 {
     public:
-        Block(sf::VideoMode videoMode, unsigned row, unsigned col);
+        Block(sf::VideoMode videoMode, unsigned row, unsigned col, bool empty);
         virtual ~Block();
     public:
         sf::RectangleShape getShape();
@@ -18,17 +18,22 @@ class Block
         void moveLeft();
         void moveDown();
         void moveUp();
+        bool isEmpty();
+        void setPosition(sf::Vector2f position);
 
     protected:
 
     private:
         sf::RectangleShape shape;
         sf::Texture *texture;
+
         int value;
         int row;
         int col;
+        bool empty;
+
+        //private functions
         void setTexture();
-        int up, down, left, right;
 };
 
 #endif // BLOCK_H

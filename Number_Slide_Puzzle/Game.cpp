@@ -42,7 +42,7 @@ void Game::pollEvents(){
 
 void Game::initVariables(){
     this->videoMode.height = 500;
-    this->videoMode.width = 380;
+    this->videoMode.width = 340;
     this->endGame = false;
     this->mouseHeld = false;
     this->puzzle = new Puzzle();
@@ -93,15 +93,17 @@ void Game::renderText(){
     float offsetX = (videoMode.width * 0.5) - 100;
     float offsetY = (videoMode.height * 0.5) - 115;
     for(unsigned i = 0; i < blocks->size(); i++){
-        blockIndex = blocks->at(i).getIndex();
-        ss.str("");
-        ss << blocks->at(i).getValue();
-        this->text.setString(ss.str());
-        this->text.setPosition(
-            offsetX + blockIndex.y*80,
-            offsetY + blockIndex.x*80
-        );
-        this->window->draw(this->text);
+        if(!blocks->at(i).isEmpty()){
+            blockIndex = blocks->at(i).getIndex();
+            ss.str("");
+            ss << blocks->at(i).getValue();
+            this->text.setString(ss.str());
+            this->text.setPosition(
+                offsetX + blockIndex.y*80,
+                offsetY + blockIndex.x*80
+            );
+            this->window->draw(this->text);
+        }
     }
 }
 
