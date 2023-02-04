@@ -14,6 +14,7 @@ class Puzzle
         void newGame(sf::VideoMode videoMode);
         std::vector<Block> *getBlocks();
         void moveBlock(sf::Vector2f mousePosView);
+        bool gameOver();
 
     protected:
 

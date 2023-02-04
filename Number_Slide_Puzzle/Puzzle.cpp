@@ -3,7 +3,7 @@
 Puzzle::Puzzle()
 {
     srand(static_cast<unsigned>(time(NULL)));
-    this->board.setSize(sf::Vector2f(259.f, 259.f));
+    this->board.setSize(sf::Vector2f(260.f, 260.f));
     this->texture = new sf::Texture();
     this->setTexture();
 }
@@ -16,7 +16,8 @@ Puzzle::~Puzzle()
 
 void Puzzle::newGame(sf::VideoMode videoMode){
     this->board.setOrigin(this->board.getSize().x * 0.5, this->board.getSize().y * 0.5);
-    this->board.setPosition(videoMode.width * 0.5, videoMode.height * 0.5);
+    this->board.setPosition(videoMode.width * 0.5 + 10, videoMode.height * 0.5);
+
     for(int i = 0; i < 3; i++){
         for(int j = 0; j < 3; j++){
             if(j != 2 || i != 2){
@@ -96,6 +97,15 @@ void Puzzle::shuffle(){
     }
 }
 
+
+bool Puzzle::gameOver(){
+    for(unsigned i = 0; i < this->blocks.size() - 1; i++){
+        if(this->blocks[i].getValue() > this->blocks[i+1].getValue()){
+            return false;
+        }
+    }
+    return true;
+}
 
 
 

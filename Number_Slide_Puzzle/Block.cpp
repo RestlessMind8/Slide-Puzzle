@@ -3,7 +3,7 @@
 Block::Block(sf::VideoMode videoMode, unsigned row, unsigned col, bool empty)
 {
     this->shape.setSize(sf::Vector2f(80.f, 80.f));
-    this->shape.setPosition((videoMode.width * 0.5) - 130 + col * 80.f, (videoMode.height * 0.5) - 130 + row * 80.f);
+    this->shape.setPosition((videoMode.width * 0.5) - 120 + col * 80.f, (videoMode.height * 0.5) - 130 + row * 80.f);
     this->texture = new sf::Texture();
     this->value = 1 + 3*row + col;
     this->row = row;

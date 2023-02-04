@@ -18,6 +18,7 @@ void Game::update(){
     this->pollEvents();
     this->updateMousePosition();
     this->play();
+    this->endGame = this->puzzle->gameOver();
 }
 
 
@@ -25,6 +26,7 @@ void Game::render(){
     this->window->clear(sf::Color(226, 183, 128));
     this->puzzle->printBoard(*this->window);
     this->renderText();
+    this->showTime();
     this->window->display();
 }
 
@@ -45,6 +47,7 @@ void Game::initVariables(){
     this->videoMode.width = 340;
     this->endGame = false;
     this->mouseHeld = false;
+    this->clock = sf::Clock();
     this->puzzle = new Puzzle();
     this->puzzle->newGame(this->videoMode);
 }
@@ -90,7 +93,8 @@ void Game::renderText(){
     std::vector<Block> *blocks = this->puzzle->getBlocks();
     std::stringstream ss;
     sf::Vector2i blockIndex;
-    float offsetX = (videoMode.width * 0.5) - 100;
+    this->text.setCharacterSize(35);
+    float offsetX = (videoMode.width * 0.5) - 90;
     float offsetY = (videoMode.height * 0.5) - 115;
     for(unsigned i = 0; i < blocks->size(); i++){
         if(!blocks->at(i).isEmpty()){
@@ -118,3 +122,35 @@ void Game::play(){
         this->mouseHeld = false;
     }
 }
+
+
+void Game::showTime(){
+    std::stringstream ss;
+    ss.str("");
+    ss << roundf(10 * this->clock.getElapsedTime().asSeconds()) / 10;
+    this->text.setString(ss.str());
+    this->text.setCharacterSize(25);
+    this->text.setPosition((this->videoMode.width - this->text.getCharacterSize()) * 0.5, 50);
+    this->window->draw(this->text);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

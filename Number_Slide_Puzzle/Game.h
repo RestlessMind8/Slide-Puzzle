@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include "Puzzle.h"
+#include <math.h>
 
 class Game
 {
@@ -45,6 +46,7 @@ class Game
         void updateMousePosition();
         void renderText();
         void play();
+        void showTime();
 };
 
 #endif // GAME_H
