@@ -15,6 +15,7 @@ class Puzzle
         std::vector<Block> *getBlocks();
         void moveBlock(sf::Vector2f mousePosView);
         bool gameOver();
+        void restart();
 
     protected:
 

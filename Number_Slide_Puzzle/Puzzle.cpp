@@ -30,6 +30,9 @@ void Puzzle::newGame(sf::VideoMode videoMode){
 }
 
 
+
+
+
 void Puzzle::printBoard(sf::RenderTarget &target){
     target.draw(this->board);
     for (unsigned i = 0; i < this->blocks.size(); i++){
@@ -80,8 +83,13 @@ void Puzzle::moveBlock(sf::Vector2f mousePosView){
 }
 
 
+void Puzzle::restart(){
+    shuffle();
+}
+
+
 void Puzzle::shuffle(){
-    for (unsigned i = 0; i < this->blocks.size() - 1; i++)
+    for (unsigned i = 0; i < this->blocks.size() - 4; i++)
     {
         int j = i + rand() % (this->blocks.size() - i);
         sf::Vector2i index = this->blocks[i].getIndex();

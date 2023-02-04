@@ -35,7 +35,9 @@ class Game
         //game logic
         bool endGame;
         bool mouseHeld;
+        bool started;
         Puzzle *puzzle;
+        float score;
 
         //private functions
         void initVariables();

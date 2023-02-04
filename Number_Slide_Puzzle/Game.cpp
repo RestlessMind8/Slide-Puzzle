@@ -14,20 +14,19 @@ Game::~Game()
 }
 
 
+void Game::render(){
+    this->window->clear(sf::Color(226, 183, 128));
+    this->puzzle->printBoard(*this->window);
+    this->showTime();
+    this->renderText();
+    this->window->display();
+}
+
+
 void Game::update(){
     this->pollEvents();
     this->updateMousePosition();
     this->play();
-    this->endGame = this->puzzle->gameOver();
-}
-
-
-void Game::render(){
-    this->window->clear(sf::Color(226, 183, 128));
-    this->puzzle->printBoard(*this->window);
-    this->renderText();
-    this->showTime();
-    this->window->display();
 }
 
 
@@ -47,6 +46,7 @@ void Game::initVariables(){
     this->videoMode.width = 340;
     this->endGame = false;
     this->mouseHeld = false;
+    this->started = false;
     this->clock = sf::Clock();
     this->puzzle = new Puzzle();
     this->puzzle->newGame(this->videoMode);
@@ -84,7 +84,6 @@ const bool Game::running() const{
 
 void Game::initText(){
     this->text.setFont(this->font);
-    this->text.setCharacterSize(35);
     this->text.setFillColor(sf::Color::Black);
 }
 
@@ -109,12 +108,24 @@ void Game::renderText(){
             this->window->draw(this->text);
         }
     }
+    if(!started || this->puzzle->gameOver()){
+        ss.str("");
+        this->puzzle->gameOver()  ? ss << "New Game" : ss << "Start Game" ;
+        this->text.setString(ss.str());
+        this->text.setPosition((this->videoMode.width - this->text.getCharacterSize() * 4) * 0.5, this->videoMode.height - 100);
+        this->window->draw(this->text);
+    }
 }
 
 
 void Game::play(){
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(!this->mouseHeld){
+        if(!started || this->puzzle->gameOver()){
+            if(this->text.getGlobalBounds().contains(mousePosView)){
+                started = !started;
+                this->puzzle->restart();
+            }
+        }else if(!this->mouseHeld){
             this->mouseHeld = true;
             this->puzzle->moveBlock(this->mousePosView);
         }
@@ -127,17 +138,22 @@ void Game::play(){
 void Game::showTime(){
     std::stringstream ss;
     ss.str("");
-    ss << roundf(10 * this->clock.getElapsedTime().asSeconds()) / 10;
+    if(this->puzzle->gameOver()){
+        ss << this->score;
+        this->clock.restart();
+    }else{
+        if(started){
+        this->score = roundf(10 * this->clock.getElapsedTime().asSeconds()) / 10;
+        ss << this->score;
+        }else{
+            ss << "0.0" ;
+        }
+    }
     this->text.setString(ss.str());
     this->text.setCharacterSize(25);
     this->text.setPosition((this->videoMode.width - this->text.getCharacterSize()) * 0.5, 50);
     this->window->draw(this->text);
 }
-
-
-
-
-
 
 
 
